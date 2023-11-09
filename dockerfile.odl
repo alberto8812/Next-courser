@@ -1,0 +1,19 @@
+#version de node que queremos que trabaje
+FROM  node:20-alpine 
+#el directorio sobre el cual queremo trabajar 
+WORKDIR /app
+# el directiorio origen y destiono
+COPY package.json /
+#sobre que sistema operativo de basa
+RUN npm install
+#ahora copiar todo lo que hace parte del proyecto todo lo que tenmos 
+COPY . /
+
+#hacer el build de produccion
+RUN npm run build
+
+#exponer el puerto sobre el que trabaja 
+EXPOSE 3000
+
+#comando con el que voy inicializar la aplicacion
+ CMD [ "npm","start" ]
